@@ -1,0 +1,69 @@
+go 0x80001000
+## Starting application at 0x80001000 ...
+
+ \ | /
+- RT -     Thread Smart Operating System
+ / | \     5.4.0 build Oct 31 2026 00:23:19
+ 2006 - 2026 Copyright by RT-Thread team
+lwIP-2.1.2 initialized!
+[15] E/kernel.obj: Object name mmcsdhotplugmb exceeds RT_NAME_MAX=12, consider increasing RT_NAME_M                                                                                                                                                                                           AX.
+[25] E/kernel.obj: Object name mmcsd_detect exceeds RT_NAME_MAX=12, consider increasing RT_NAME_MAX                                                                                                                                                                                           .
+[36] D/drv.enet: UNIQUE_ID is 6d568a5a32219d7
+[40] D/drv.enet: UNIQUE_ID change to 32 bits 6a347083
+[47] I/drv.enet: emac device init success
+[51] D/drv.enet: UNIQUE_ID is 6d568a5a32219d7
+[56] D/drv.enet: UNIQUE_ID change to 32 bits 6a347083
+[62] I/drv.enet: emac device init success
+[124] I/SDIO: SD card capacity 30533632 KB.
+[131] I/SDIO: SD card switch to High Speed / SDR25 mode
+found part[0], begin: 16384, size: 29.121GB
+[193] I/SDIO: emmc card capacity 7634944 KB, card sec count:15269888.
+[204] I/SDIO: emmc: switch to HIGH Speed mode
+
+found part[0], begin: 1048576, size: 32.0MB
+found part[1], begin: 34603008, size: 7.255GB
+[304] I/touch: rt_touch init success
+[308] I/gt911: touch device gt911 init success
+[319] I/sal.skt: Socket Abstraction Layer initialize success.
+[325] I/drivers.serial: Using /dev/ttyS0 as default console
+[833] W/DFS.fs: mount / failed with file system type: elm
+[845] E/SDIO: mmcsd request blocks error
+[850] E/SDIO: -255,0,0, 0x00000001,0x00008cc0
+[855] E/SDIO: error -255 requesting status
+[860] E/SDIO: mmcsd request blocks error
+[864] E/SDIO: -255,0,0, 0x00000002,0x00000bb4
+sd0 file system initialization done!
+[872] E/SDIO: mmcsd request blocks error
+[877] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[882] E/SDIO: mmcsd request blocks error
+[886] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[891] E/SDIO: mmcsd request blocks error
+[896] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[901] E/SDIO: mmcsd request blocks error
+[905] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[910] E/SDIO: mmcsd request blocks error
+[915] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[920] E/SDIO: mmcsd request blocks error
+[924] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[930] E/SDIO: mmcsd request blocks error
+[934] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[939] E/SDIO: mmcsd request blocks error
+[944] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[1449] E/SDIO: mmcsd request blocks error
+[1453] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[1459] E/SDIO: mmcsd request blocks error
+[1463] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[1968] E/SDIO: mmcsd request blocks error
+[1972] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[1977] E/SDIO: mmcsd request blocks error
+[1982] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[2487] E/SDIO: mmcsd request blocks error
+[2491] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[2496] E/SDIO: mmcsd request blocks error
+[2501] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[3006] E/SDIO: mmcsd request blocks error
+[3010] E/SDIO: -255,0,0, 0x00000002,0x00008020
+[3016] E/SDIO: mmcsd request blocks error
+[3020] E/SDIO: -255,0,0, 0x00000002,0x00008020
+open em failed!
+hello rt-smart

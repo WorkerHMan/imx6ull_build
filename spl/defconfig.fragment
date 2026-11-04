@@ -1,0 +1,31 @@
+# SPL 配置片段 —— 追加到 uboot/configs/mx6ull_atk_defconfig 之后
+#
+# 用法（一次性合并进板级 defconfig）：
+#   cat spl/defconfig.fragment >> uboot/configs/mx6ull_atk_defconfig
+#
+# 或运行时（推荐，保持 defconfig 干净）：
+#   make -C uboot O=build/uboot mx6ull_atk_defconfig
+#   ./uboot/scripts/kconfig/merge_config.sh -O build/uboot \
+#        build/uboot/.config spl/defconfig.fragment
+
+# ---- 启用 SPL ----
+CONFIG_SPL=y
+CONFIG_SPL_TEXT_BASE=0x00908000
+CONFIG_SPL_MMC=y
+CONFIG_SPL_SERIAL=y
+CONFIG_SPL_LIBCOMMON_SUPPORT=y
+CONFIG_SPL_LIBGENERIC_SUPPORT=y
+
+# ---- 镜像拼接：SPL 填充到 128KB，U-Boot proper 紧跟其后 ----
+# 改 SPL_PAD_TO 必须同步改下面的 SECTOR：(0x400 + PAD) / 512
+CONFIG_SPL_PAD_TO=0x20000
+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x102
+
+# ---- 第一阶段不显示 ----
+# SPL 里没有 fb/console，改这些只会白白吃 92KB 预算
+# CONFIG_SPL_SILENT_CONSOLE=y
+
+# ---- 可选：SPL 里验 U-Boot 的 FIT 签名（会 select SPL_CRYPTO，约 +15~25KB）----
+# CONFIG_SPL_LOAD_FIT=y
+# CONFIG_SPL_FIT_SIGNATURE=y
