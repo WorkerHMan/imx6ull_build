@@ -24,15 +24,39 @@ imx6ull/packages       ← RT-Thread 包索引
 imx6ull/userapps       ← 用户态
 ```
 
-五个仓库都已建 `main` 分支并推了初始提交：
+五个仓库都已建 `main` 分支，并且**已把 monorepo 的内容按目录导入**：
 
-| 项目 | main | 提交 |
-|---|---|---|
-| `imx6ull/build` | `b7138a7` | docs: 补一句分区表指引 |
-| `imx6ull/rt-thread` | `c75ed21` | init: 仓库初始化 |
-| `imx6ull/uboot` | `a49a51e` | init: 仓库初始化 |
-| `imx6ull/packages` | `8c25bb5` | init: 仓库初始化 |
-| `imx6ull/userapps` | `8fbd7fe` | init: 仓库初始化 |
+| 项目 | main | 文件数 | 裸库体积 | 内容 |
+|---|---|---|---|---|
+| `imx6ull/build` | `0f87113` | 40 | 260 K | `build/` `spl/` `01_docs/` `README.md` |
+| `imx6ull/rt-thread` | `cd08385` | 38,753 | **464 M** | RT-Thread Smart 5.4.0 全树（含 BSP 与 NXP SDK） |
+| `imx6ull/uboot` | `1f74215` | 39,054 | 56 M | U-Boot v2026.10 全树（含 SPL） |
+| `imx6ull/packages` | `7662983` | 1,829 | 1.2 M | RT-Thread 包索引快照 |
+| `imx6ull/userapps` | `8dbc0ca` | 276 | 3.9 M | 用户态工程快照 |
+
+> `02_vendor/`（正点原子资料 254 MB）**没有对应仓库**，暂不导入。
+> `out/` 是产物，不导入。
+
+### 导入用的办法
+
+```bash
+# 1. Windows 侧打包（SMB 上直接 tar，比逐个文件拷快）
+tar -C Z:\...\rtt_imx6ull\rtthread -cf E:\...\rtthread.tar --exclude=.git --exclude=build .
+
+# 2. WSL 里解到 Gerrit 仓库并推送
+git clone ssh://guoqiangh@localhost:29418/imx6ull/rt-thread ~/work/import/rtthread
+tar -xf /mnt/e/.../rtthread.tar -C ~/work/import/rtthread
+git add -A && git commit -m "import: ..." && git push origin HEAD:refs/heads/main
+```
+
+实测耗时（WSL 本地 ext4，不是 SMB）：
+
+| 仓库 | 解包 | git add | push |
+|---|---|---|---|
+| uboot（39 k 文件） | 4 s | 4 s | 7 s |
+| rt-thread（39 k 文件 / 1.45 GB） | 15 s | 15 s | 20 s |
+
+**关键**：一定先 `tar` 到本地盘再解包，直接在 `/mnt`（9p/drvfs）上 `git add` 会慢十倍以上。
 
 **端到端已验证**：`imx6ull/build` 上有一个待评审的 **Change 21**（docs: 说明项目改名 product -> build）。
 
