@@ -31,6 +31,9 @@ ROOT=$(cd "$BUILD_DIR/.." && pwd)
 cd "$ROOT" || exit 1
 
 BOARD=${BOARD:-atk-dl6y2c}
+# 允许用环境变量覆盖板级配置里的工具链设置
+ENV_RTT_EXEC_PATH=${RTT_EXEC_PATH:-}
+ENV_CROSS=${CROSS:-}
 CONF="$BUILD_DIR/configs/$BOARD.conf"
 if [ ! -f "$CONF" ]; then
     echo "!! 找不到板级配置 $CONF"
@@ -39,6 +42,9 @@ if [ ! -f "$CONF" ]; then
 fi
 # shellcheck disable=SC1090
 . "$CONF"
+# 环境变量优先于配置文件
+[ -n "$ENV_RTT_EXEC_PATH" ] && RTT_EXEC_PATH="$ENV_RTT_EXEC_PATH"
+[ -n "$ENV_CROSS" ] && CROSS="$ENV_CROSS"
 
 JOBS=${JOBS:-$(nproc 2>/dev/null || echo 4)}
 OUT_DIR=${OUT_DIR:-out}
